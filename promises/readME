@@ -5,3 +5,6 @@ it has three states
 @pending - intial state ( not yet started)
 @resolved(fullfilled) - operation completed successfully
 @Rejected - operation failure
+
+
+questions---------------

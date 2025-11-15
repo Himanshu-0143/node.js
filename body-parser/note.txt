@@ -1,0 +1,2 @@
+it is a middleware used in expresss to parse the incoming jason request body, so you can easily acess from data or JSON sent by the client 
+// npm install body-parser 

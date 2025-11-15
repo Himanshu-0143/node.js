@@ -1,0 +1,14 @@
+json is the lightweight data format used to store and exchange, it uses key-vaule pair 
+{
+  "name": "HIM",
+  "age": 21,
+  "city": "LKo"
+}
+
+
+
+**   TASk    **
+1. Create a products.json file and new products using the node.js
+2. Read student.json, increase everyone's marks by 5 , and save changes.
+3. create books.json, then update the price of one book.
+4. Combine the data from the JSON files into one file(merged.json)...
