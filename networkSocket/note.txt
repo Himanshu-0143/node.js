@@ -1,0 +1,20 @@
+a socket is like a communication endpoint- A two-way door that allows data to travel between
+A client (browser, app, device)
+A server (node.js backend)
+
+uses-
+chat appplications
+online multiplayer gaes
+live notifical
+live tracking
+stock price update
+
+
+how sockets work in NodeJS 
+1. TCP sockets -> via built in module 
+
+
+
+npm install ws
+npm install socket.io
+
