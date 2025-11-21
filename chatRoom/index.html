@@ -1,0 +1,100 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatroom</title>
+  <style>
+    #chat {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    #chat li {
+      padding: 4px 8px;
+      margin-bottom: 5px;
+      background: #f2f2f2;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Chatroom App</h2>
+
+  <input id="roomName" placeholder="Enter room name" />
+  <button onclick="joinRoom()">Join</button>
+  <button onclick="leaveRoom()">Leave</button>
+  <br /><br />
+
+  <input id="messageInput" placeholder="Type message" onkeyup="handleKey(event)" />
+  <button onclick="sendMessage()">Send</button>
+
+  <ul id="chat"></ul>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script>
+    const socket = io("http://localhost:3000");
+    let currentRoom = null;
+
+    // Listen for messages from server
+    socket.on("message", ({ user, message }) => {
+      addMessageToList(user, message);
+    });
+
+    function joinRoom() {
+      const room = document.getElementById("roomName").value.trim();
+      if (!room) return alert("Please enter a room name");
+
+      socket.emit("joinRoom", room);
+      currentRoom = room;
+
+      addMessageToList("system", `Joined room: ${room}`);
+    }
+
+    function leaveRoom() {
+      if (!currentRoom) return alert("You are not in any room");
+
+      socket.emit("leaveRoom", currentRoom);
+      addMessageToList("system", `Left room: ${currentRoom}`);
+      currentRoom = null;
+    }
+
+    function sendMessage() {
+      const messageInput = document.getElementById("messageInput");
+      const message = messageInput.value.trim();
+
+      if (!currentRoom) return alert("Join a room first");
+      if (!message) return alert("Type a message");
+
+      socket.emit("message", { room: currentRoom, message });
+
+      addMessageToList("Me", message); // show my own msg immediately
+      messageInput.value = ""; // clear input
+    }
+
+    // Handling ENTER key for sending messages
+    function handleKey(event) {
+      if (event.key === "Enter") sendMessage();
+    }
+
+    // Helper to print messages in UI & auto-scroll
+    function addMessageToList(user, text) {
+      const chatList = document.getElementById("chat");
+      const li = document.createElement("li");
+      li.textContent = `${user}: ${text}`;
+      chatList.appendChild(li);
+
+      // scroll to latest message
+      chatList.scrollTop = chatList.scrollHeight;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+[
+  {
+    "rollno": 101,
+    "name": "Alice Johnson",
+    "marks": 85,
+    "course": "Computer Science"
+  },
+  {
+    "rollno": 102,
+    "name": "Bob Smith",
+    "marks": 85,
+    "course": "Mathematics"
+  },
+  {
+    "rollno": 103,
+    "name": "Charlie Brown",
+    "marks": 92,
+    "course": "Physics"
+  },
+  {
+    "rollno": 105,
+    "name": "Eve Taylor",
+    "marks": 95,
+    "course": "Computer Science"
+  },
+  {
+    "rollno": 106,
+    "name": "Frank Wilson",
+    "marks": 82,
+    "course": "Biology"
+  }
+]
